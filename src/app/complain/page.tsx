@@ -81,7 +81,7 @@ export default function CrimeReportForm() {
     try {
       // Get user_id from localStorage
       const userId = localStorage.getItem("user_id")
-      if (!userId) {
+      if (userId) {
         toast
         setIsSubmitting(false)
         return
@@ -89,10 +89,10 @@ export default function CrimeReportForm() {
 
       // Create FormData for API submission
       const submitData = new FormData()
-      submitData.append("user_id", userId)
-      submitData.append("vehicle_number", formData.vehicleNumber)
-      submitData.append("location", formData.location)
-      submitData.append("crime_type", formData.crimeType)
+      // submitData.append("user_id", userId)
+      submitData.append("regs_no", formData.vehicleNumber)
+      submitData.append("spotted_location", formData.location)
+      submitData.append("crime_attempted", formData.crimeType)
       submitData.append("extra_info", formData.extraInfo)
 
       if (formData.image) {
@@ -100,7 +100,7 @@ export default function CrimeReportForm() {
       }
 
       // Submit to API
-      const response = await fetch("/api/crime-reports", {
+      const response = await fetch("http://127.0.0.1:8000/api/add-suspected/", {
         method: "POST",
         body: submitData,
       })
