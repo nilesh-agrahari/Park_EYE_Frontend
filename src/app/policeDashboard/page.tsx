@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -34,12 +34,27 @@ export default function VehiclesPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
+  const logoutTimerRef = useRef<NodeJS.Timeout | null>(null)
 
   const playSound = () => {
     const audio = new Audio("") // put alert.mp3 in your public/ folder
     audio.play()
   }
 
+    // 🔹 Function to handle logout
+  const handleLogout = () => {
+    localStorage.removeItem("police_id")
+    alert("Session expired. Please log in again.")
+    router.push("/policeLogin")
+  }
+
+  // 🔹 Reset inactivity timer
+  const resetTimer = () => {
+    if (logoutTimerRef.current) 
+      clearTimeout(logoutTimerRef.current)
+    // Set auto logout after 15 minutes (900000 ms)
+    logoutTimerRef.current = setTimeout(handleLogout, 5 * 60 * 1000)
+  }
 
   useEffect(() => {
     const userId = localStorage.getItem("police_id")
@@ -55,6 +70,21 @@ export default function VehiclesPage() {
 
     // // cleanup interval when leaving the page
     // return () => clearInterval(interval)
+
+    window.addEventListener("mousemove", resetTimer)
+    window.addEventListener("keydown", resetTimer)
+    window.addEventListener("click", resetTimer)
+
+    resetTimer() // start timer when component mounts
+
+    return () => {
+      if (logoutTimerRef.current) 
+        clearTimeout(logoutTimerRef.current)
+      window.removeEventListener("mousemove", resetTimer)
+      window.removeEventListener("keydown", resetTimer)
+      window.removeEventListener("click", resetTimer)
+    }
+
 
   }, [router])
 

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import { AlertTriangle, Car, Clock, MapPin, Calendar, Users, CheckCircle, XCircle } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 
@@ -33,7 +34,7 @@ export default function ParkingRecordsPage() {
     const userId = localStorage.getItem("parking_id")
     if (!userId) {
       toast
-      router.push("/login")
+      router.push("/parkingLogin")
       return
     }
     fetchRecords()
@@ -69,6 +70,12 @@ export default function ParkingRecordsPage() {
       setLoading(false)
     }
   }
+
+  const handleLogOut=() => () => {
+    localStorage.removeItem("parking_id")
+    router.push("/parkingLogin")
+  }
+
 
   const formatDateTime = (dateTime: string) => {
     return new Date(dateTime).toLocaleString("en-US", {
@@ -144,6 +151,9 @@ export default function ParkingRecordsPage() {
               onChange={(e) => setSelectedDate(e.target.value)}
               className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
+          </div>
+          <div>
+            <Button onClick={handleLogOut()} className="bg-red-500 hover:bg-red-700">Logout</Button>
           </div>
         </div>
 
