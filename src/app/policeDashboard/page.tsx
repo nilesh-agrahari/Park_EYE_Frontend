@@ -5,9 +5,8 @@ import { useRouter } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Skeleton } from "@/components/ui/skeleton"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { MapPin, Car, AlertTriangle, User, RefreshCw } from "lucide-react"
+import { MapPin, AlertTriangle, User, RefreshCw } from "lucide-react"
 
 interface SuspectedVehicle {
   id: string
