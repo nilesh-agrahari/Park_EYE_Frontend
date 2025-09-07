@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { useToast } from "../../../hooks/use-toast"
+import { useToast } from "@/hooks/use-toast"
 import { Camera, MapPin, AlertTriangle, Upload } from "lucide-react"
 
 const crimeTypes = ["Theft", "Vandalism", "Hit and Run", "Reckless Driving", "Drug Related", "Assault", "Other"]

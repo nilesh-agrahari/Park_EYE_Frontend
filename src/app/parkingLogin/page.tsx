@@ -37,7 +37,7 @@ export default function SignIn() {
 
 
         //sending data to server
-        fetch("http://127.0.0.1:8000/api/police-login/", {
+        fetch("http://127.0.0.1:8000/api/parking-login/", {
             method: "POST",
             headers:{
                 "Content-Type": "application/json",
@@ -58,9 +58,9 @@ export default function SignIn() {
                     toast
                     // alert('Signup success!');
                     console.log(data);
-                    const policeId = data.police_id;
-                    localStorage.setItem("police_id", policeId);
-                    router.push(`/policeDashboard?police_id=${policeId}`);
+                    const parkingId = data.parking_id;
+                    localStorage.setItem("parking_id", parkingId);
+                    router.push(`/parkingRegister?parking_id=${parkingId}`);
                 }
 
                 console.log(data);
