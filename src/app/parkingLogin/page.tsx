@@ -37,7 +37,7 @@ export default function SignIn() {
 
 
         //sending data to server
-        fetch("http://127.0.0.1:8000/api/parking-login/", {
+        fetch("https://parkeye.onrender.com/api/parking-login/", {
             method: "POST",
             headers:{
                 "Content-Type": "application/json",

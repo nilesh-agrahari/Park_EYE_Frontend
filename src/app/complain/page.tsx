@@ -100,7 +100,7 @@ export default function CrimeReportForm() {
       }
 
       // Submit to API
-      const response = await fetch("http://127.0.0.1:8000/api/add-suspected/", {
+      const response = await fetch("https://parkeye.onrender.com/api/add-suspected/", {
         method: "POST",
         body: submitData,
       })

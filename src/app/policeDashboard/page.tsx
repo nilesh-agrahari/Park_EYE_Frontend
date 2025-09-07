@@ -93,7 +93,7 @@ export default function VehiclesPage() {
       setLoading(true)
       setError(null)
 
-      const response = await fetch(`http://127.0.0.1:8000/api/police-dashboard/${localStorage.getItem("police_id")}/`)
+      const response = await fetch(`https://parkeye.onrender.com/api/police-dashboard/${localStorage.getItem("police_id")}/`)
 
       if (!response.ok) {
         throw new Error("Failed to fetch vehicle data")

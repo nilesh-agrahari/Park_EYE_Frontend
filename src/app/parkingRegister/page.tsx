@@ -43,7 +43,7 @@ export default function ParkingRecordsPage() {
   const fetchRecords = async () => {
     try {
       setLoading(true)
-      const response = await fetch(`http://127.0.0.1:8000/api/vehicles/?date=${selectedDate}&parking_id=${localStorage.getItem("parking_id")} `)
+      const response = await fetch(`https://parkeye.onrender.com/api/vehicles/?date=${selectedDate}&parking_id=${localStorage.getItem("parking_id")} `)
       // const response = await fetch(`http://127.0.0.1:8000/api/vehicles/`)
 
       if (!response.ok) {
