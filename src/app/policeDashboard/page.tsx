@@ -119,29 +119,23 @@ export default function VehiclesPage() {
     }
   }
 
-//   if (loading) {
-//     return (
-//       <div className="min-h-screen bg-gray-50 p-4">
-//         <div className="max-w-4xl mx-auto space-y-6">
-//           <Skeleton className="h-8 w-64" />
-//           <div className="grid gap-4">
-//             {[1, 2, 3].map((i) => (
-//               <Card key={i}>
-//                 <CardHeader>
-//                   <Skeleton className="h-6 w-32" />
-//                 </CardHeader>
-//                 <CardContent className="space-y-3">
-//                   <Skeleton className="h-4 w-full" />
-//                   <Skeleton className="h-4 w-3/4" />
-//                   <Skeleton className="h-4 w-1/2" />
-//                 </CardContent>
-//               </Card>
-//             ))}
-//           </div>
-//         </div>
-//       </div>
-//     )
-//   }
+  const enquired = async (vehicleId: string) => {
+    try {
+      const response = await fetch(`https://parkeye.onrender.com/api/mark-enquired/${vehicleId}/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      if (!response.ok) {
+        throw new Error("Failed to mark vehicle as enquired")
+      }
+      // Refresh data after marking as enquired
+      fetchVehicleData()
+    } catch (err) {
+      alert(err instanceof Error ? err.message : "An error occurred")
+    }
+  }
 
   if (error) {
     return (
@@ -291,7 +285,9 @@ export default function VehiclesPage() {
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-lg font-bold text-blue-900">{vehicle.regs_no}</CardTitle>
-                    <Badge className={getStatusColor(vehicle.is_founded)}>status</Badge>
+                    <Button className="btn" onClick={() => enquired(vehicle.id)}>
+                      Mark as Enquired
+                    </Button>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
